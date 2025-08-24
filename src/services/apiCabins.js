@@ -10,12 +10,12 @@ export async function getCabins() {
     return data;
 }
 
-export async function createEditCabin(newCabin, id) {
-    const hasImagePath = newCabin.image?.startsWith?.(import.meta.env.VITE_SUPABASE_URL);
+export async function createUpdateCabin(newCabin, id) {
+    const hasImagePath = newCabin.image?.startsWith?.(supabase.supabaseUrl);
     const imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll("/", "");
     const imagePath = hasImagePath
         ? newCabin.image
-        : `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/cabin-images/${imageName}`;
+        : `${supabase.supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
 
     let query = supabase.from("cabins");
 
