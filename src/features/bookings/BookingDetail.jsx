@@ -8,12 +8,13 @@ import Tag from "../../ui/Tag";
 import ButtonGroup from "../../ui/ButtonGroup";
 import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
+import Empty from "../../ui/Empty";
 
 import { useMoveBack } from "../../hooks/useMoveBack";
 import { useBooking } from "./useBooking";
 import Spinner from "../../ui/Spinner";
 import { useNavigate } from "react-router-dom";
-import { HiArrowUpOnSquare, HiTrash } from "react-icons/hi2";
+import { HiArrowUpOnSquare } from "react-icons/hi2";
 import { useCheckout } from "../check-in-out/useCheckout";
 import { useDeleteBooking } from "./useDeleteBooking";
 import Modal from "../../ui/Modal";
@@ -34,6 +35,7 @@ function BookingDetail() {
     const { isDeleting, deleteBooking } = useDeleteBooking();
 
     if (isLoading) return <Spinner />;
+    if (!booking) return <Empty resourceName="booking" />;
 
     const { status, id: bookingId } = booking;
 
